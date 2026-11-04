@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ECO-CHAUFFE | Chauffagiste à Quaregnon, région de Mons-Borinage</title>
   <meta name="description" content="ECO-CHAUFFE, à Quaregnon depuis 2016 : chauffage, ventilation, climatisation (CVC), gaz, sanitaire et installation de systèmes thermiques dans la région de Mons-Borinage.">
+  <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#040046">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <script>document.documentElement.classList.add('js')</script>
@@ -146,26 +147,36 @@
         <div class="svc-ph"><img src="/media/s-chaudiere.webp" width="900" height="1200" alt="Mains gantées réglant une chaudière" loading="lazy" decoding="async"></div>
         <i class="svc-ic"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="13" rx="2"/><path class="pulse" d="M8 8v7m4-7v7m4-7v7"/><path d="M7 18v2m10-2v2"/></svg></i>
         <h3>Chauffage central</h3>
+        <span class="svc-more" aria-hidden="true">Voir <i></i></span>
+        <button class="svc-hit" type="button" data-sv="chauffage" aria-label="Voir le détail : Chauffage central"></button>
       </div></article>
       <article class="svc-card"><div class="svc-in">
         <div class="svc-ph"><img src="/media/s-clim.webp" width="900" height="847" alt="Technicien lisant ses manomètres" loading="lazy" decoding="async"></div>
         <i class="svc-ic"><svg viewBox="0 0 24 24"><path class="spin" d="M12 3v18M4.200 7.500l15.600 9M4.200 16.500l15.600-9"/></svg></i>
         <h3>Climatisation</h3>
+        <span class="svc-more" aria-hidden="true">Voir <i></i></span>
+        <button class="svc-hit" type="button" data-sv="climatisation" aria-label="Voir le détail : Climatisation"></button>
       </div></article>
       <article class="svc-card"><div class="svc-in">
         <div class="svc-ph"><img src="/media/s-entretien.webp" width="900" height="1200" alt="Manomètre et vanne orange sur un circuit" loading="lazy" decoding="async"></div>
         <i class="svc-ic"><svg viewBox="0 0 24 24"><path class="flick" d="M12 3c.6 3.500 5 5.500 5 10.500a5 5 0 0 1-10 0c0-1.800 1-3 2-4 .2 1.500 1 2.200 2 2.500C10.500 9 11 6 12 3Z"/></svg></i>
         <h3>Gaz</h3>
+        <span class="svc-more" aria-hidden="true">Voir <i></i></span>
+        <button class="svc-hit" type="button" data-sv="gaz" aria-label="Voir le détail : Gaz"></button>
       </div></article>
       <article class="svc-card"><div class="svc-in">
         <div class="svc-ph"><img src="/media/s-radiateur.webp" width="900" height="1200" alt="Raccordement de tuyaux" loading="lazy" decoding="async"></div>
         <i class="svc-ic"><svg viewBox="0 0 24 24"><path class="pulse" d="M12 3s6 6.600 6 11a6 6 0 0 1-12 0c0-4.400 6-11 6-11Z"/></svg></i>
         <h3>Sanitaire</h3>
+        <span class="svc-more" aria-hidden="true">Voir <i></i></span>
+        <button class="svc-hit" type="button" data-sv="sanitaire" aria-label="Voir le détail : Sanitaire"></button>
       </div></article>
       <article class="svc-card"><div class="svc-in">
         <div class="svc-ph"><img src="/media/s-pac.webp" width="900" height="1200" alt="Unité extérieure contre un mur" loading="lazy" decoding="async"></div>
         <i class="svc-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.500"/><path class="spin" d="M12 12c0-4 3-5 4-4s-1 4-4 4Zm0 0c4 0 5 3 4 4s-4-1-4-4Zm0 0c0 4-3 5-4 4s1-4 4-4Zm0 0c-4 0-5-3-4-4s4 1 4 4Z"/></svg></i>
         <h3>Ventilation</h3>
+        <span class="svc-more" aria-hidden="true">Voir <i></i></span>
+        <button class="svc-hit" type="button" data-sv="ventilation" aria-label="Voir le détail : Ventilation"></button>
       </div></article>
     </div>
     <div class="svc-bar" aria-hidden="true"><i></i></div>
@@ -190,10 +201,10 @@
       <div class="big-pct"><span data-count="4">4</span><small>compétences</small></div>
       <h2 class="t">Un métier <em>reconnu.</em></h2>
       <ul class="feats">
-        <li data-rise><i class="feat-ic"><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><span>Chauffage central</span></li>
-        <li data-rise><i class="feat-ic"><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><span>Climatisation</span></li>
-        <li data-rise><i class="feat-ic"><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><span>Gaz</span></li>
-        <li data-rise><i class="feat-ic"><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><span>Sanitaire</span></li>
+        <li data-rise><button type="button" class="feat-b" data-sv="chauffage"><i class="feat-ic"><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><span>Chauffage central</span></button></li>
+        <li data-rise><button type="button" class="feat-b" data-sv="climatisation"><i class="feat-ic"><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><span>Climatisation</span></button></li>
+        <li data-rise><button type="button" class="feat-b" data-sv="gaz"><i class="feat-ic"><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><span>Gaz</span></button></li>
+        <li data-rise><button type="button" class="feat-b" data-sv="sanitaire"><i class="feat-ic"><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><span>Sanitaire</span></button></li>
       </ul>
     </div>
   </div>
@@ -418,7 +429,7 @@
     </div>
     <div>
       <h3>Services</h3>
-      <a href="#services">Chauffage central</a><a href="#services">Climatisation</a><a href="#services">Ventilation</a><a href="#services">Gaz</a><a href="#services">Sanitaire</a>
+      <a href="#services" data-sv="chauffage">Chauffage central</a><a href="#services" data-sv="climatisation">Climatisation</a><a href="#services" data-sv="ventilation">Ventilation</a><a href="#services" data-sv="gaz">Gaz</a><a href="#services" data-sv="sanitaire">Sanitaire</a>
     </div>
     <div>
       <h3>Le site</h3>
@@ -448,6 +459,194 @@
   </div>
 </footer>
 </div>
+
+<!-- Détail des services : s'ouvre depuis une carte, un bouton ou un lien du pied de page -->
+<dialog class="sv live" id="sv" aria-label="Détail du service" data-lenis-prevent>
+  <article class="sv-page" data-sv="chauffage" tabindex="-1" aria-labelledby="sv-t-chauffage" hidden>
+    <div class="sv-bg">
+      <div class="sv-ph"><picture><source media="(max-width: 900px)" srcset="/media/s-chaudiere.webp"><img src="/media/sv-chauffage.webp" width="1920" height="1080" alt="Mains gantées réglant une chaudière" loading="lazy" decoding="async"></picture></div>
+      <div class="sv-shade"></div>
+      <div class="sv-veil"></div>
+    </div>
+    <div class="sv-first">
+      <div class="sv-head">
+        <i class="sv-ic"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="13" rx="2"/><path class="pulse" d="M8 8v7m4-7v7m4-7v7"/><path d="M7 18v2m10-2v2"/></svg></i>
+        <h2 class="sv-t" id="sv-t-chauffage">Chauffage central</h2>
+        <p class="sv-line">De la chaudière au dernier radiateur, une chaleur égale dans chaque pièce.</p>
+      </div>
+      <ul class="sv-items">
+        <li><span class="sv-it"><i><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><b>Chaudière</b></span></li>
+        <li><span class="sv-it"><i><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><b>Radiateurs</b></span></li>
+        <li><span class="sv-it"><i><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><b>Circuit</b></span></li>
+        <li><span class="sv-it"><i><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><b>Régulation</b></span></li>
+      </ul>
+      <span class="sv-hint" aria-hidden="true">Faites défiler <i></i></span>
+    </div>
+    <div class="sv-more">
+      <div class="sv-q">
+        <h3>Un projet de <em>chauffage central ?</em></h3>
+        <div class="sv-acts">
+          <a class="btn btn-fire sv-devis" href="#contact" data-name="Chauffage central">Demander un devis <i class="btn-dot"><svg class="ic"><use href="#i-arrow"/></svg></i></a>
+          <a class="btn btn-navy" href="tel:+32471053884">0471 05 38 84 <i class="btn-dot"><svg class="ic"><use href="#i-phone"/></svg></i></a>
+        </div>
+      </div>
+      <button class="sv-next sv-next-go" type="button" aria-label="Service suivant : Climatisation">
+        <span class="sv-next-ph"><img src="/media/s-clim.webp" width="900" height="847" alt="" loading="lazy" decoding="async"></span>
+        <span class="sv-next-tx"><small>Service suivant</small><b>Climatisation</b></span>
+        <i class="btn-dot"><svg class="ic"><use href="#i-arrow"/></svg></i>
+      </button>
+    </div>
+  </article>
+  <article class="sv-page" data-sv="climatisation" tabindex="-1" aria-labelledby="sv-t-climatisation" hidden>
+    <div class="sv-bg">
+      <div class="sv-ph"><picture><source media="(max-width: 900px)" srcset="/media/s-clim.webp"><img src="/media/sv-climatisation.webp" width="1920" height="1080" alt="Technicien lisant ses manomètres" loading="lazy" decoding="async"></picture></div>
+      <div class="sv-shade"></div>
+      <div class="sv-veil"></div>
+    </div>
+    <div class="sv-first">
+      <div class="sv-head">
+        <i class="sv-ic"><svg viewBox="0 0 24 24"><path class="spin" d="M12 3v18M4.200 7.500l15.600 9M4.200 16.500l15.600-9"/></svg></i>
+        <h2 class="sv-t" id="sv-t-climatisation">Climatisation</h2>
+        <p class="sv-line">Une température stable, même au cœur de l’été.</p>
+      </div>
+      <ul class="sv-items">
+        <li><span class="sv-it"><i><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><b>Unité intérieure</b></span></li>
+        <li><span class="sv-it"><i><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><b>Unité extérieure</b></span></li>
+        <li><span class="sv-it"><i><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><b>Raccordements</b></span></li>
+        <li><span class="sv-it"><i><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><b>Mise en service</b></span></li>
+      </ul>
+      <span class="sv-hint" aria-hidden="true">Faites défiler <i></i></span>
+    </div>
+    <div class="sv-more">
+      <div class="sv-q">
+        <h3>Un projet de <em>climatisation ?</em></h3>
+        <div class="sv-acts">
+          <a class="btn btn-fire sv-devis" href="#contact" data-name="Climatisation">Demander un devis <i class="btn-dot"><svg class="ic"><use href="#i-arrow"/></svg></i></a>
+          <a class="btn btn-navy" href="tel:+32471053884">0471 05 38 84 <i class="btn-dot"><svg class="ic"><use href="#i-phone"/></svg></i></a>
+        </div>
+      </div>
+      <button class="sv-next sv-next-go" type="button" aria-label="Service suivant : Gaz">
+        <span class="sv-next-ph"><img src="/media/s-entretien.webp" width="900" height="1200" alt="" loading="lazy" decoding="async"></span>
+        <span class="sv-next-tx"><small>Service suivant</small><b>Gaz</b></span>
+        <i class="btn-dot"><svg class="ic"><use href="#i-arrow"/></svg></i>
+      </button>
+    </div>
+  </article>
+  <article class="sv-page" data-sv="gaz" tabindex="-1" aria-labelledby="sv-t-gaz" hidden>
+    <div class="sv-bg">
+      <div class="sv-ph"><picture><source media="(max-width: 900px)" srcset="/media/s-entretien.webp"><img src="/media/sv-gaz.webp" width="1920" height="1080" alt="Manomètre et vanne orange sur un circuit" loading="lazy" decoding="async"></picture></div>
+      <div class="sv-shade"></div>
+      <div class="sv-veil"></div>
+    </div>
+    <div class="sv-first">
+      <div class="sv-head">
+        <i class="sv-ic"><svg viewBox="0 0 24 24"><path class="flick" d="M12 3c.6 3.500 5 5.500 5 10.500a5 5 0 0 1-10 0c0-1.800 1-3 2-4 .2 1.500 1 2.200 2 2.500C10.500 9 11 6 12 3Z"/></svg></i>
+        <h2 class="sv-t" id="sv-t-gaz">Gaz</h2>
+        <p class="sv-line">Un réseau posé avec soin, de l’arrivée jusqu’à l’appareil.</p>
+      </div>
+      <ul class="sv-items">
+        <li><span class="sv-it"><i><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><b>Conduites</b></span></li>
+        <li><span class="sv-it"><i><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><b>Raccordements</b></span></li>
+        <li><span class="sv-it"><i><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><b>Appareils</b></span></li>
+        <li><span class="sv-it"><i><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><b>Contrôle</b></span></li>
+      </ul>
+      <span class="sv-hint" aria-hidden="true">Faites défiler <i></i></span>
+    </div>
+    <div class="sv-more">
+      <div class="sv-q">
+        <h3>Un projet de <em>gaz ?</em></h3>
+        <div class="sv-acts">
+          <a class="btn btn-fire sv-devis" href="#contact" data-name="Gaz">Demander un devis <i class="btn-dot"><svg class="ic"><use href="#i-arrow"/></svg></i></a>
+          <a class="btn btn-navy" href="tel:+32471053884">0471 05 38 84 <i class="btn-dot"><svg class="ic"><use href="#i-phone"/></svg></i></a>
+        </div>
+      </div>
+      <button class="sv-next sv-next-go" type="button" aria-label="Service suivant : Sanitaire">
+        <span class="sv-next-ph"><img src="/media/s-radiateur.webp" width="900" height="1200" alt="" loading="lazy" decoding="async"></span>
+        <span class="sv-next-tx"><small>Service suivant</small><b>Sanitaire</b></span>
+        <i class="btn-dot"><svg class="ic"><use href="#i-arrow"/></svg></i>
+      </button>
+    </div>
+  </article>
+  <article class="sv-page" data-sv="sanitaire" tabindex="-1" aria-labelledby="sv-t-sanitaire" hidden>
+    <div class="sv-bg">
+      <div class="sv-ph"><picture><source media="(max-width: 900px)" srcset="/media/s-radiateur.webp"><img src="/media/sv-sanitaire.webp" width="1920" height="1080" alt="Raccordement de tuyaux" loading="lazy" decoding="async"></picture></div>
+      <div class="sv-shade"></div>
+      <div class="sv-veil"></div>
+    </div>
+    <div class="sv-first">
+      <div class="sv-head">
+        <i class="sv-ic"><svg viewBox="0 0 24 24"><path class="pulse" d="M12 3s6 6.600 6 11a6 6 0 0 1-12 0c0-4.400 6-11 6-11Z"/></svg></i>
+        <h2 class="sv-t" id="sv-t-sanitaire">Sanitaire</h2>
+        <p class="sv-line">L’eau chaude et l’eau froide, là où vous en avez besoin.</p>
+      </div>
+      <ul class="sv-items">
+        <li><span class="sv-it"><i><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><b>Arrivées d’eau</b></span></li>
+        <li><span class="sv-it"><i><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><b>Évacuations</b></span></li>
+        <li><span class="sv-it"><i><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><b>Appareils</b></span></li>
+        <li><span class="sv-it"><i><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><b>Eau chaude</b></span></li>
+      </ul>
+      <span class="sv-hint" aria-hidden="true">Faites défiler <i></i></span>
+    </div>
+    <div class="sv-more">
+      <div class="sv-q">
+        <h3>Un projet de <em>sanitaire ?</em></h3>
+        <div class="sv-acts">
+          <a class="btn btn-fire sv-devis" href="#contact" data-name="Sanitaire">Demander un devis <i class="btn-dot"><svg class="ic"><use href="#i-arrow"/></svg></i></a>
+          <a class="btn btn-navy" href="tel:+32471053884">0471 05 38 84 <i class="btn-dot"><svg class="ic"><use href="#i-phone"/></svg></i></a>
+        </div>
+      </div>
+      <button class="sv-next sv-next-go" type="button" aria-label="Service suivant : Ventilation">
+        <span class="sv-next-ph"><img src="/media/s-pac.webp" width="900" height="1200" alt="" loading="lazy" decoding="async"></span>
+        <span class="sv-next-tx"><small>Service suivant</small><b>Ventilation</b></span>
+        <i class="btn-dot"><svg class="ic"><use href="#i-arrow"/></svg></i>
+      </button>
+    </div>
+  </article>
+  <article class="sv-page" data-sv="ventilation" tabindex="-1" aria-labelledby="sv-t-ventilation" hidden>
+    <div class="sv-bg">
+      <div class="sv-ph"><picture><source media="(max-width: 900px)" srcset="/media/s-pac.webp"><img src="/media/sv-ventilation.webp" width="1920" height="1080" alt="Unité extérieure contre un mur" loading="lazy" decoding="async"></picture></div>
+      <div class="sv-shade"></div>
+      <div class="sv-veil"></div>
+    </div>
+    <div class="sv-first">
+      <div class="sv-head">
+        <i class="sv-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.500"/><path class="spin" d="M12 12c0-4 3-5 4-4s-1 4-4 4Zm0 0c4 0 5 3 4 4s-4-1-4-4Zm0 0c0 4-3 5-4 4s1-4 4-4Zm0 0c-4 0-5-3-4-4s4 1 4 4Z"/></svg></i>
+        <h2 class="sv-t" id="sv-t-ventilation">Ventilation</h2>
+        <p class="sv-line">Un air sain et renouvelé, pièce par pièce.</p>
+      </div>
+      <ul class="sv-items">
+        <li><span class="sv-it"><i><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><b>Extraction</b></span></li>
+        <li><span class="sv-it"><i><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><b>Gaines</b></span></li>
+        <li><span class="sv-it"><i><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><b>Bouches</b></span></li>
+        <li><span class="sv-it"><i><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><b>Réglages</b></span></li>
+      </ul>
+      <span class="sv-hint" aria-hidden="true">Faites défiler <i></i></span>
+    </div>
+    <div class="sv-more">
+      <div class="sv-q">
+        <h3>Un projet de <em>ventilation ?</em></h3>
+        <div class="sv-acts">
+          <a class="btn btn-fire sv-devis" href="#contact" data-name="Ventilation">Demander un devis <i class="btn-dot"><svg class="ic"><use href="#i-arrow"/></svg></i></a>
+          <a class="btn btn-navy" href="tel:+32471053884">0471 05 38 84 <i class="btn-dot"><svg class="ic"><use href="#i-phone"/></svg></i></a>
+        </div>
+      </div>
+      <button class="sv-next sv-next-go" type="button" aria-label="Service suivant : Chauffage central">
+        <span class="sv-next-ph"><img src="/media/s-chaudiere.webp" width="900" height="1200" alt="" loading="lazy" decoding="async"></span>
+        <span class="sv-next-tx"><small>Service suivant</small><b>Chauffage central</b></span>
+        <i class="btn-dot"><svg class="ic"><use href="#i-arrow"/></svg></i>
+      </button>
+    </div>
+  </article>
+  <div class="sv-bar">
+    <span class="sv-count"><b>01</b> / 05</span>
+    <span class="sv-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+    <span class="sv-ctrl">
+      <button class="sv-btn sv-prev" type="button" aria-label="Service précédent"><svg class="ic" style="transform:rotate(-135deg)"><use href="#i-arrow"/></svg></button>
+      <button class="sv-btn sv-nxt" type="button" aria-label="Service suivant"><svg class="ic" style="transform:rotate(45deg)"><use href="#i-arrow"/></svg></button>
+      <button class="sv-btn sv-close" type="button" aria-label="Fermer" autofocus><span></span></button>
+    </span>
+  </div>
+</dialog>
 
 <!-- Barre d'action sur téléphone -->
 <nav class="bar" aria-label="Actions rapides">

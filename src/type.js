@@ -24,10 +24,15 @@ export function splitTitle(el) {
 
 // Fige la largeur des mots à leur graisse finale : une lettre fine ne fait pas remonter un mot à la ligne d'avant.
 export function lockWords(root = document) {
-  const all = [...root.querySelectorAll('.w')]
-  all.forEach((w) => { w.style.minWidth = '' })
-  const sizes = all.map((w) => w.getBoundingClientRect().width)
-  all.forEach((w, i) => { w.style.minWidth = `${sizes[i]}px` })
+  const all = [...root.querySelectorAll('.t .w, .fill .w')]
+  all.forEach((w) => { w.style.width = ''; w.style.height = ''; w.style.contain = '' })
+  const sizes = all.map((w) => [w.offsetWidth, w.offsetHeight])
+  all.forEach((w, i) => {
+    if (!sizes[i][0]) return
+    w.style.width = `${sizes[i][0]}px`
+    w.style.height = `${sizes[i][1]}px`
+    w.style.contain = 'layout size'
+  })
 }
 
 // Lettres seules, pour un mot que l'on anime à part (héros, titre thermique)
@@ -54,23 +59,52 @@ export function proximity(titles, gsap) {
   })
 
   const RADIUS = 170, GAIN = 340, vh = () => innerHeight
+  // Centre de chaque lettre par rapport au titre : mesuré une fois, à l'arrivée à l'écran
+  const measure = (t) => {
+    const b = t.getBoundingClientRect()
+    data.get(t).forEach((c) => {
+      const r = c.el.getBoundingClientRect()
+      c.dx = r.left + r.width / 2 - b.left
+      c.dy = r.top + r.height / 2 - b.top
+    })
+    t._w = b.width
+    t._h = b.height
+    t._docTop = b.top + scrollY
+    t._measured = true
+  }
+  addEventListener('resize', () => titles.forEach((t) => { t._measured = false }))
+
+  let lastKey = ''
   gsap.ticker.add(() => {
+    if (!active.size) return
+    // Rien n'a bougé et toutes les lettres sont revenues : aucun calcul
+    const key = touch ? `${scrollY}` : `${pointer.x},${pointer.y},${scrollY}`
+    let moving = key !== lastKey
+    lastKey = key
     active.forEach((t) => {
-      const box = t.getBoundingClientRect()
-      const px = touch ? box.left + box.width * gsap.utils.clamp(0, 1, 1.15 - box.top / vh()) : pointer.x
-      const py = touch ? box.top + box.height / 2 : pointer.y
-      const near = !touch && (py < box.top - RADIUS || py > box.bottom + RADIUS)
-      data.get(t).forEach((c) => {
+      const list = data.get(t)
+      if (!moving && !t._settling) return
+      if (!t._measured) measure(t)
+      const box = touch ? null : t.getBoundingClientRect()
+      const px = touch ? t._w * gsap.utils.clamp(0, 1, 1.15 - (t._docTop - scrollY) / vh()) : pointer.x - box.left
+      const py = touch ? 0 : pointer.y - box.top
+      // Au doigt, la vague n'a pas bougé d'un pixel utile : on ne recalcule rien
+      if (touch && !t._settling && t._px !== undefined && Math.abs(px - t._px) < 5) return
+      t._px = px
+      const far = !touch && (py < -RADIUS || py > t._h + RADIUS)
+      let settling = false
+      list.forEach((c) => {
         let target = 0
-        if (!near) {
-          const r = c.el.getBoundingClientRect()
-          const dist = Math.hypot(px - (r.left + r.width / 2), touch ? 0 : py - (r.top + r.height / 2))
+        if (!far) {
+          const dist = touch ? Math.abs(px - c.dx) : Math.hypot(px - c.dx, py - c.dy)
           target = Math.max(0, 1 - dist / RADIUS) ** 2 * GAIN
         }
         c.cur += (target - c.cur) * 0.16
-        const v = Math.abs(c.cur) < 0.5 ? 0 : c.cur
-        if (c.last !== Math.round(v)) { c.last = Math.round(v); c.el.style.setProperty('--wp', c.last) }
+        if (Math.abs(target - c.cur) > 1) settling = true
+        const v = Math.round((Math.abs(c.cur) < 0.5 ? 0 : c.cur) / 25) * 25
+        if (c.last !== v) { c.last = v; c.el.style.setProperty('--wp', v) }
       })
+      t._settling = settling
     })
   })
 }

@@ -2,6 +2,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
 import { thermal } from './thermal.js'
+import { setupServices } from './services.js'
 import { splitTitle, splitChars, lockWords, proximity } from './type.js'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -15,6 +16,8 @@ const FINE = matchMedia('(hover: hover) and (pointer: fine)').matches
 const clamp = gsap.utils.clamp
 const deg = (v) => v.toFixed(1).replace('.', ',')
 const vh = () => innerHeight
+// « max » désactive un déclencheur tout en bas de page ; celui-ci reste actif jusqu'au bout
+const FOREVER = 1e9
 
 /* ---------- Défilement ---------- */
 let lenis = null
@@ -115,6 +118,7 @@ setupAnchors()
 setupFaq()
 setupReviews()
 setupForm()
+const services = setupServices({ gsap, lenis, RM, goTo })
 
 if (!RM) motion()
 
@@ -134,27 +138,29 @@ function motion() {
 
   // Une section entièrement recouverte n'a plus à être peinte
   ;[['.intro', '.svc-wrap'], ['.trust', '.cases'], ['.cases', '.proc-wrap'], ['.perks', '.band']].forEach(([el, next]) => {
-    ScrollTrigger.create({ trigger: next, start: 'top top', end: 'max', toggleClass: { targets: el, className: 'is-gone' } })
+    ScrollTrigger.create({ trigger: next, start: 'top top', end: FOREVER, toggleClass: { targets: el, className: 'is-gone' } })
   })
 
-  ScrollTrigger.create({ start: 40, end: 'max', toggleClass: { targets: '.hdr', className: 'is-stuck' } })
+  ScrollTrigger.create({ start: 40, end: FOREVER, toggleClass: { targets: '.hdr', className: 'is-stuck' } })
 
   /* ---------- Boucles décoratives : seulement à l'écran ---------- */
-  const liveIO = new IntersectionObserver((list) => list.forEach((en) => en.target.classList.toggle('live', en.isIntersecting)))
+  const liveIO = new IntersectionObserver((list) => list.forEach((en) => en.target.classList.toggle('live', en.isIntersecting)), { rootMargin: '60% 0px' })
   $$('section').forEach((s) => liveIO.observe(s))
 
   /* ---------- Thermomètre ---------- */
   const hudFill = $('.hud-tube i'), hudVal = $('.hud-val span')
+  let hudLast = ''
   ScrollTrigger.create({
     start: 0, end: 'max',
     onUpdate(s) {
       hudFill.style.transform = PHONE.matches ? `scaleX(${s.progress})` : `scaleY(${s.progress})`
-      hudVal.textContent = deg(12 + 9 * s.progress)
+      const hv = deg(12 + 9 * s.progress)
+      if (hv !== hudLast) { hudLast = hv; hudVal.textContent = hv }
     },
   })
 
   // Le thermomètre s'efface sur le pied de page : 21° atteints, il laisse la place aux mentions
-  ScrollTrigger.create({ trigger: '.ft', start: 'top 88%', end: 'max', toggleClass: { targets: '.hud', className: 'is-off' } })
+  ScrollTrigger.create({ trigger: '.ft', start: 'top 88%', end: FOREVER, toggleClass: { targets: '.hud', className: 'is-off' } })
 
   /* ---------- Titres : mots qui sortent d'un masque, lettres qui prennent du poids ---------- */
   const titles = []
@@ -198,7 +204,7 @@ function motion() {
   })
   $$('[data-count]').forEach((el) => {
     const to = +el.dataset.count, from = +(el.dataset.from || 0), o = { v: from }
-    gsap.to(o, { v: to, ease: 'none', onUpdate: () => { el.textContent = Math.round(o.v) }, scrollTrigger: { trigger: el, start: el.dataset.st || 'top 97%', end: el.dataset.en || 'top 72%', scrub: 0.6 } })
+    gsap.to(o, { v: to, ease: 'none', onUpdate: () => { const n = Math.round(o.v); if (n !== o.n) { o.n = n; el.textContent = n } }, scrollTrigger: { trigger: el, start: el.dataset.st || 'top 97%', end: el.dataset.en || 'top 72%', scrub: 0.6 } })
     el.textContent = from
   })
 
@@ -272,7 +278,8 @@ function motion() {
     defaults: { ease: 'none' },
     scrollTrigger: {
       trigger: '.hero-wrap', start: 'top top', end: 'bottom bottom', scrub: 0.5,
-      onToggle(s) { heroOn = s.isActive; breathe.paused(!s.isActive) },
+      onToggle(s) { heroOn = s.isActive },
+      onUpdate(s) { breathe.paused(s.progress > 0.01) },
     },
   })
   h.to({}, { duration: 1 }, 0) // 0 → 0,5 : seul à l'écran ; 0,5 → 1 : recouvert
@@ -320,9 +327,15 @@ function motion() {
   }
   svcLayout()
   svcRender(0)
+  services.setSync((i) => {
+    const st = ScrollTrigger.getById('svc-track')
+    const p = clamp(0, 1, (centers[i] - innerWidth / 2) / dist)
+    lenis.scrollTo(st.start + (st.end - st.start) * p, { immediate: true, force: true })
+    svcRender(p)
+  })
   ScrollTrigger.addEventListener('refreshInit', svcLayout)
   ScrollTrigger.create({
-    trigger: svcWrap, start: 'top top', end: () => `+=${dist / 1.25}`,
+    id: 'svc-track', trigger: svcWrap, start: 'top top', end: () => `+=${dist / 1.25}`,
     onUpdate: (s) => svcRender(s.progress),
     onRefresh: (s) => svcRender(s.progress),
   })
@@ -364,14 +377,15 @@ function motion() {
     tickEls.push(l)
   }
   const knob = $('.dial-knob'), dialVal = $('.dial-val span')
-  let lit = -1, lastDeg = -1, lastDot = -1
+  let lit = -1, lastDeg = -1, lastDot = -1, lastFw = -1
   const dial = (p) => {
     const n = Math.round(p * TICKS)
     if (n !== lit) { tickEls.forEach((t, i) => t.classList.toggle('on', i < n)); lit = n }
     knob.style.transform = `rotate(${-135 + 270 * p}deg)`
     const d = Math.round(12 + 9 * p)
     if (d !== lastDeg) { dialVal.textContent = d; lastDeg = d }
-    dialVal.style.fontWeight = Math.round((250 + 600 * p) / 50) * 50
+    const fw = Math.round((250 + 600 * p) / 50) * 50
+    if (fw !== lastFw) { lastFw = fw; dialVal.style.fontWeight = fw }
     const s = Math.min(steps.length - 1, Math.floor(p * steps.length))
     if (s !== lastDot) { dots.forEach((o, i) => o.classList.toggle('on', i <= s)); lastDot = s }
   }
@@ -400,6 +414,7 @@ function motion() {
   const line = $('.morph-line'), lineChars = splitChars(line)
   lineChars.forEach((c) => c.style.setProperty('--ws', line.dataset.from))
   const probe = $('.th-probe'), probeVal = $('.th-probe b span'), thP = { p: 0 }
+  let probeLast = ''
   gsap.set(probe, { x: -220 })
   ScrollTrigger.create({ trigger: '.th-wrap', start: 'top bottom', end: 'bottom top', onToggle: (s) => { bigOn = s.isActive } })
   const big = gsap.timeline({
@@ -411,7 +426,8 @@ function motion() {
     onUpdate() {
       bigTh?.set(thP.p)
       gsap.set(probe, { x: (thP.p * 1.4 - 0.2) * innerWidth })
-      probeVal.textContent = deg(12 + 9 * thP.p)
+      const pv = deg(12 + 9 * thP.p)
+      if (pv !== probeLast) { probeLast = pv; probeVal.textContent = pv }
     },
   }, 0)
   big.fromTo(lineChars, { '--ws': +line.dataset.from }, { '--ws': +line.dataset.to, stagger: 0.03, duration: 0.5 }, 0.05)
@@ -443,14 +459,21 @@ function motion() {
   /* ---------- Bandeau : glisse au scroll, se penche avec la vitesse, chaque mot gonfle au centre ---------- */
   const rows = $$('.band-row'), bandWords = rows.map((r) => $$('span', r))
   let bandOn = false, skew = 0
+  let bandBoxes = null
+  let bandSpans = []
+  const bandMeasure = () => {
+    bandBoxes = bandWords.map((list) => list.map((w) => w.offsetLeft + w.offsetWidth / 2))
+    bandSpans = rows.map((r) => r.scrollWidth - innerWidth * 0.8)
+  }
+  addEventListener('resize', () => { bandBoxes = null })
   const bandRender = (p) => {
+    if (!bandBoxes) bandMeasure()
     rows.forEach((r, i) => {
-      const dir = +r.dataset.dir, span = r.scrollWidth - innerWidth * 0.8
+      const dir = +r.dataset.dir, span = bandSpans[i]
       const x = dir < 0 ? -span * p * 0.6 : -span * (0.6 - p * 0.6)
       r.style.transform = `translate3d(${x}px,0,0) skewX(${skew}deg)`
-      bandWords[i].forEach((w) => {
-        const b = w.getBoundingClientRect()
-        const t = 1 - Math.min(1, Math.abs(b.left + b.width / 2 - innerWidth / 2) / (innerWidth * 0.55))
+      bandWords[i].forEach((w, k) => {
+        const t = 1 - Math.min(1, Math.abs(bandBoxes[i][k] + x - innerWidth / 2) / (innerWidth * 0.55))
         const v = Math.round((180 + 640 * t * t) / 40) * 40
         if (w._v !== v) { w._v = v; w.style.setProperty('--wv', v) }
       })
@@ -478,7 +501,7 @@ function motion() {
     },
   })
   ScrollTrigger.create({
-    trigger: '.cta', start: 'top bottom', end: 'max',
+    trigger: '.cta', start: 'top bottom', end: FOREVER,
     onToggle: (s) => { if (s.isActive) v.play().catch(() => {}); else v.pause() },
   })
   gsap.fromTo(v, { scale: 1.22 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.cta', start: 'top bottom', end: 'top top', scrub: true } })

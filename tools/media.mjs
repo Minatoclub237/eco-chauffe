@@ -10,6 +10,12 @@ const jobs = [
   ['thumb-a', '39317578', crop(500, 250, 1500, 1500), 480, 480, 76],
   ['thumb-b', '5551188', crop(650, 1500, 1300, 1300), 480, 480, 76],
   ['intro', '16509869', null, 1500, null, 78],
+  // Panneaux de services sur ordinateur
+  ['sv-chauffage', '7859953', crop(500, 760, 1720, 973), 1720, null, 76],
+  ['sv-climatisation', '5463575', crop(650, 1065, 1390, 782), 1600, null, 78],
+  ['sv-gaz', '39353208', null, 1920, null, 76],
+  ['sv-sanitaire', '29226620', null, 1920, null, 76],
+  ['sv-ventilation', '20046693', null, 1920, null, 76],
   ['s-pac', '20046693', crop(650, 250, 1100, 1467), 900, 1200, 76],
   ['s-chaudiere', '7859953', crop(800, 150, 1180, 1573), 900, 1200, 76],
   ['s-radiateur', '29226620', crop(700, 100, 1200, 1600), 900, 1200, 76],
