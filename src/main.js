@@ -153,6 +153,9 @@ function motion() {
     },
   })
 
+  // Le thermomètre s'efface sur le pied de page : 21° atteints, il laisse la place aux mentions
+  ScrollTrigger.create({ trigger: '.ft', start: 'top 88%', end: 'max', toggleClass: { targets: '.hud', className: 'is-off' } })
+
   /* ---------- Titres : mots qui sortent d'un masque, lettres qui prennent du poids ---------- */
   const titles = []
   $$('.t').forEach((el) => {

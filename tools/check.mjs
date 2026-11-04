@@ -77,6 +77,32 @@ const go = (p, y) => p.evaluate((v) => window.__lenis.scrollTo(v, { immediate: t
   await p.close()
 }
 
+// ---- Pied de page, pages légales, vie privée ----
+{
+  const p = await b.newPage(); await p.setViewport({ width: 1440, height: 827 })
+  const hosts = new Set(); p.on('request', (r) => { const u = new URL(r.url()); if (u.protocol.startsWith('http')) hosts.add(u.host) })
+  await p.goto(U, { waitUntil: 'networkidle2' }); await wait(1200)
+  await p.evaluate(() => window.__lenis.scrollTo(document.documentElement.scrollHeight, { immediate: true, force: true })); await wait(3000)
+  const priv = await p.evaluate(() => ({ cookie: document.cookie, ls: localStorage.length, ss: sessionStorage.length }))
+  ok('aucun cookie ni stockage', !priv.cookie && !priv.ls && !priv.ss, JSON.stringify(priv))
+  ok('aucune requête vers un tiers', [...hosts].every((h) => h.startsWith('localhost')), [...hosts].join(', '))
+  const txt = await p.evaluate(() => document.querySelector('.ft').innerText)
+  for (const m of ['Youssef Garziad', 'Rue Alphonse Brenez 206', '0664.557.193', 'TVA BE 0664.557.193', '0471 05 38 84', 'garziad@hotmail.com', 'Mentions légales', 'Confidentialité', 'Cookies']) ok('pied de page : ' + m, txt.includes(m))
+  const left = await p.evaluate(() => document.documentElement.outerHTML.match(/votre-domaine|00 00 00 00 00|À confirmer|\+33/g))
+  ok('plus aucun contenu provisoire', !left, String(left))
+  for (const path of ['mentions-legales.html', 'confidentialite.html']) {
+    const r = await p.goto(U + path, { waitUntil: 'networkidle2' })
+    const t = await p.evaluate(() => ({ h1: document.querySelector('h1')?.textContent, over: document.documentElement.scrollWidth > innerWidth }))
+    ok('page ' + path, r.status() === 200 && !!t.h1 && !t.over, t.h1)
+  }
+  for (const w of [1190, 1280, 1366]) {
+    await p.setViewport({ width: w, height: 800 }); await p.goto(U, { waitUntil: 'networkidle2' }); await wait(500)
+    const n = await p.evaluate(() => { const r = document.querySelector('.nav'); const c = [...r.children].map((e) => e.getBoundingClientRect()); return { over: r.scrollWidth > r.clientWidth + 1 || c.some((x) => x.right > innerWidth), tall: Math.max(...c.map((x) => x.height)) } })
+    ok('en-tête sur une ligne à ' + w + ' px', !n.over && n.tall < 70, JSON.stringify(n))
+  }
+  await p.close()
+}
+
 // ---- Téléphone ----
 {
   const p = await b.newPage(); await p.setViewport({ width: 390, height: 844, deviceScaleFactor: 2, isMobile: true, hasTouch: true })
