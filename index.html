@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ECO-CHAUFFE | Chauffage, pompes à chaleur et entretien</title>
+  <meta name="description" content="Pompes à chaleur, chaudières, planchers chauffants et entretien : plus de chaleur, moins d'énergie.">
+  <meta name="theme-color" content="#040046">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="preload" as="image" href="/media/hero-1600.webp" imagesrcset="/media/hero-1600.webp 1600w, /media/hero.webp 2200w" imagesizes="100vw" media="not all and (max-width: 900px) and (orientation: portrait)">
+  <link rel="preload" as="image" href="/media/m/hero.webp" media="(max-width: 900px) and (orientation: portrait)">
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body id="top">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M6 18 18 6M8 6h10v10" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3 6h18v12H3zM3 7l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-7.2 7-12.5A7 7 0 0 0 5 9.500C5 14.800 12 22 12 22Z M12 12a2.500 2.500 0 1 0 0-5 2.500 2.500 0 0 0 0 5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-logo" viewBox="0 0 32 32"><path d="M16 2c1 6 8 9 8 17a8 8 0 0 1-16 0c0-3 1.500-5 3-6.500.3 2.500 1.500 3.500 3 4C13.500 11 14 6 16 2Z" fill="url(#g-logo)"/><defs><linearGradient id="g-logo" x1="8" y1="28" x2="24" y2="4" gradientUnits="userSpaceOnUse"><stop stop-color="#142C98"/><stop offset=".55" stop-color="#3E6BF0"/><stop offset="1" stop-color="#F5623A"/></linearGradient></defs></symbol>
+</svg>
+
+<!-- ======================= EN-TÊTE ======================= -->
+<header class="hdr">
+  <div class="topbar">
+    <span><svg class="ic"><use href="#i-pin"/></svg> Adresse à renseigner</span>
+    <a href="mailto:contact@votre-domaine.fr"><svg class="ic"><use href="#i-mail"/></svg> contact@votre-domaine.fr</a>
+  </div>
+  <div class="nav">
+    <a class="logo" href="#top" aria-label="ECO-CHAUFFE, retour en haut">
+      <svg><use href="#i-logo"/></svg><span>ECO<b>-</b>CHAUFFE</span>
+    </a>
+    <nav class="links" aria-label="Navigation principale">
+      <a href="#services"><small>01</small><span class="roll"><span>Services</span></span></a>
+      <a href="#realisations"><small>02</small><span class="roll"><span>Réalisations</span></span></a>
+      <a href="#methode"><small>03</small><span class="roll"><span>Méthode</span></span></a>
+      <a href="#questions"><small>04</small><span class="roll"><span>Questions</span></span></a>
+      <a href="#contact"><small>05</small><span class="roll"><span>Contact</span></span></a>
+    </nav>
+    <a class="tel" href="tel:+33000000000"><svg class="ic"><use href="#i-phone"/></svg> 00 00 00 00 00</a>
+    <a class="btn btn-fire btn-s" href="#contact" data-mag>Devis gratuit <i class="btn-dot"><svg class="ic"><use href="#i-arrow"/></svg></i></a>
+    <button class="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <a href="#services">Services</a>
+  <a href="#realisations">Réalisations</a>
+  <a href="#methode">Méthode</a>
+  <a href="#questions">Questions</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- Thermomètre : la page monte en température au fil du défilement -->
+<div class="hud" aria-hidden="true">
+  <div class="hud-tube"><i></i></div>
+  <div class="hud-val"><span>12,0</span>°</div>
+</div>
+
+<main>
+
+<!-- ======================= HÉROS ======================= -->
+<div class="hero-wrap">
+  <section class="hero" aria-label="Accueil">
+    <div class="hero-media">
+      <picture>
+        <source media="(max-width: 900px) and (orientation: portrait)" srcset="/media/m/hero.webp">
+        <img id="hero-img" src="/media/hero-1600.webp" srcset="/media/hero-1600.webp 1600w, /media/hero.webp 2200w" sizes="100vw" width="2200" height="1334" alt="Technicien contrôlant une unité extérieure à la lampe" fetchpriority="high">
+      </picture>
+      <canvas class="thermal-cv" aria-hidden="true"></canvas>
+      <svg class="h-line" aria-hidden="true"><path pathLength="100"/></svg>
+      <picture>
+        <source media="(max-width: 900px) and (orientation: portrait)" srcset="/media/m/hero-fg.webp">
+        <img class="hero-fg" src="/media/hero-fg-1600.webp" srcset="/media/hero-fg-1600.webp 1600w, /media/hero-fg.webp 2200w" sizes="100vw" width="2200" height="1334" alt="" decoding="async">
+      </picture>
+      <div class="hero-grad"></div>
+      <span class="h-pill h-pill-a"><i></i>Entretien</span>
+      <span class="h-pill h-pill-b h-late"><i></i>Pompe à chaleur</span>
+    </div>
+
+    <div class="hero-in">
+      <h1 class="h-title" aria-label="Plus de chaleur, moins d'énergie.">
+        <span class="hl hl-ink" aria-hidden="true"><span class="hl-t">Plus de <span class="morph" data-from="300" data-to="900">chaleur,</span></span></span>
+        <span class="hl hl-fire" aria-hidden="true"><span class="hl-t">moins d’<span class="morph" data-from="800" data-to="200">énergie.</span></span></span>
+      </h1>
+      <div class="h-foot">
+        <div class="h-thumbs">
+          <span class="h-thumb"><img src="/media/thumb-a.webp" width="480" height="480" alt=""></span>
+          <span class="h-thumb"><img src="/media/thumb-b.webp" width="480" height="480" alt=""></span>
+        </div>
+        <a class="btn btn-white" href="#services" data-mag>Découvrir <i class="btn-dot"><svg class="ic"><use href="#i-arrow"/></svg></i></a>
+      </div>
+    </div>
+
+    <div class="h-rate h-late">
+      <div class="stars" aria-hidden="true">★★★★★</div>
+      <strong>4,8<small>/5</small></strong>
+      <span>Avis Google</span>
+    </div>
+
+    <button class="cue" type="button">Faites défiler <i></i></button>
+    <div class="dim hero-dim"></div>
+  </section>
+</div>
+
+<!-- ======================= INTRO ======================= -->
+<section class="intro under">
+  <div class="intro-head">
+    <span class="chip"><i></i>Notre métier</span>
+    <h2 class="fill">Une chaleur <span class="pill-flow" aria-hidden="true"></span> juste, pour la maison comme pour le bureau.</h2>
+  </div>
+  <div class="intro-grid">
+    <div class="n-card" data-tilt data-rise>
+      <div class="n-main">
+        <div class="n-big"><span data-count="16">16</span></div>
+        <div class="n-rate"><strong>4,8</strong><span class="stars" aria-hidden="true">★★★★★</span></div>
+      </div>
+      <div class="n-side">
+        <span class="n-vert">Années de métier</span>
+        <span class="n-flow"></span>
+      </div>
+    </div>
+    <div class="intro-media">
+      <figure class="notch" data-reveal>
+        <div class="par-box"><img src="/media/intro.webp" width="1500" height="993" alt="Mains gantées serrant un raccord à la clé" loading="lazy" decoding="async" data-img></div>
+      </figure>
+      <div class="notch-cta"><a class="btn btn-navy" href="#contact" data-mag>Nous parler <i class="btn-dot"><svg class="ic"><use href="#i-arrow"/></svg></i></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= SERVICES ======================= -->
+<div class="svc-wrap" id="services">
+  <section class="svc">
+    <div class="svc-head">
+      <span class="chip"><i></i>Services</span>
+      <h2 class="t">Tout ce qui <em>chauffe.</em></h2>
+    </div>
+    <div class="svc-track">
+      <article class="svc-card"><div class="svc-in">
+        <div class="svc-ph"><img src="/media/s-pac.webp" width="900" height="1200" alt="Pompe à chaleur extérieure" loading="lazy" decoding="async"></div>
+        <i class="svc-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.500"/><path class="spin" d="M12 12c0-4 3-5 4-4s-1 4-4 4Zm0 0c4 0 5 3 4 4s-4-1-4-4Zm0 0c0 4-3 5-4 4s1-4 4-4Zm0 0c-4 0-5-3-4-4s4 1 4 4Z"/></svg></i>
+        <h3>Pompe à chaleur</h3>
+      </div></article>
+      <article class="svc-card"><div class="svc-in">
+        <div class="svc-ph"><img src="/media/s-chaudiere.webp" width="900" height="1200" alt="Mains gantées réglant une chaudière" loading="lazy" decoding="async"></div>
+        <i class="svc-ic"><svg viewBox="0 0 24 24"><path class="flick" d="M12 3c.6 3.500 5 5.500 5 10.500a5 5 0 0 1-10 0c0-1.800 1-3 2-4 .2 1.500 1 2.200 2 2.500C10.500 9 11 6 12 3Z"/></svg></i>
+        <h3>Chaudière</h3>
+      </div></article>
+      <article class="svc-card"><div class="svc-in">
+        <div class="svc-ph"><img src="/media/s-plancher.webp" width="900" height="1200" alt="Tubes rouges d'un plancher chauffant en cours de pose" loading="lazy" decoding="async"></div>
+        <i class="svc-ic"><svg viewBox="0 0 24 24"><path d="M3 20h18"/><path class="rise" d="M7 16c-2-2 2-3 0-6s2-3 0-5m5 11c-2-2 2-3 0-6s2-3 0-5m5 11c-2-2 2-3 0-6s2-3 0-5"/></svg></i>
+        <h3>Plancher chauffant</h3>
+      </div></article>
+      <article class="svc-card"><div class="svc-in">
+        <div class="svc-ph"><img src="/media/s-radiateur.webp" width="900" height="1200" alt="Raccordement d'un radiateur" loading="lazy" decoding="async"></div>
+        <i class="svc-ic"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="13" rx="2"/><path class="pulse" d="M8 8v7m4-7v7m4-7v7"/><path d="M7 18v2m10-2v2"/></svg></i>
+        <h3>Radiateurs</h3>
+      </div></article>
+      <article class="svc-card"><div class="svc-in">
+        <div class="svc-ph"><img src="/media/s-clim.webp" width="900" height="847" alt="Technicien lisant ses manomètres" loading="lazy" decoding="async"></div>
+        <i class="svc-ic"><svg viewBox="0 0 24 24"><path class="spin" d="M12 3v18M4.200 7.500l15.600 9M4.200 16.500l15.600-9"/></svg></i>
+        <h3>Climatisation</h3>
+      </div></article>
+      <article class="svc-card"><div class="svc-in">
+        <div class="svc-ph"><img src="/media/s-entretien.webp" width="900" height="1200" alt="Manomètre et vanne sur un circuit" loading="lazy" decoding="async"></div>
+        <i class="svc-ic"><svg viewBox="0 0 24 24"><path class="wiggle" d="M15 4a5 5 0 0 0-5.500 6.800L3.500 17a2.100 2.100 0 0 0 3 3l6.200-6a5 5 0 0 0 6.800-5.500l-3 3-3-1-1-3Z"/></svg></i>
+        <h3>Entretien</h3>
+      </div></article>
+    </div>
+    <div class="svc-bar" aria-hidden="true"><i></i></div>
+    <div class="dim svc-dim"></div>
+  </section>
+</div>
+
+<!-- ======================= CONFIANCE ======================= -->
+<section class="trust under">
+  <div class="trust-grid">
+    <div class="trust-media">
+      <div class="trust-block" data-par="-14"></div>
+      <figure class="trust-ph" data-reveal>
+        <div class="par-box"><img src="/media/trust.webp" width="1200" height="1200" alt="Artisan en gilet de sécurité, clé à la main" loading="lazy" decoding="async" data-img></div>
+      </figure>
+      <div class="trust-card" data-rise>
+        <i class="tc-dot"></i>
+        <p>Un seul interlocuteur, du devis au dernier réglage.</p>
+      </div>
+    </div>
+    <div class="trust-body">
+      <div class="big-pct"><span data-count="98">98</span><sup>%</sup></div>
+      <h2 class="t">Des clients <em>qui reviennent.</em></h2>
+      <ul class="feats">
+        <li data-rise><i class="feat-ic"><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><span>Devis clair</span></li>
+        <li data-rise><i class="feat-ic"><svg viewBox="0 0 24 24"><path class="draw" pathLength="100" d="M4 12.500 9.500 18 20 6.500"/></svg></i><span>Chantier propre</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat" data-rise><b><span data-count="100">100</span>+</b><span>Chantiers</span></div>
+    <div class="stat" data-rise><b><span data-count="150">150</span>+</b><span>Entretiens</span></div>
+    <div class="stat" data-rise><b><span data-count="96">96</span> %</b><span>Recommandé</span></div>
+    <div class="stat" data-rise><b><span data-count="16">16</span>+</b><span>Ans de métier</span></div>
+  </div>
+</section>
+
+<!-- ======================= RÉALISATIONS ======================= -->
+<div class="anchor" id="realisations"></div>
+<section class="cases under">
+  <div class="cases-grid">
+    <div class="case-col case-col-a" data-par="9">
+      <div class="cases-head">
+        <span class="chip"><i></i>Réalisations</span>
+        <h2 class="t">Du chantier <em>au confort.</em></h2>
+      </div>
+      <figure class="case" data-reveal>
+        <div class="par-box r-tall"><img src="/media/c-radiateur.webp" width="1100" height="1171" alt="Artisan purgeant un radiateur en fonte" loading="lazy" decoding="async" data-img></div>
+        <figcaption><span>01</span>Radiateurs</figcaption>
+      </figure>
+    </div>
+    <div class="case-col case-col-b" data-par="-9">
+      <figure class="case" data-reveal>
+        <div class="par-box"><img src="/media/c-facade.webp" width="1100" height="855" alt="Pompe à chaleur devant une façade moderne" loading="lazy" decoding="async" data-img></div>
+        <figcaption><span>02</span>Pompe à chaleur</figcaption>
+      </figure>
+      <figure class="case" data-reveal>
+        <div class="par-box"><img src="/media/c-tuyaux.webp" width="1100" height="733" alt="Raccord de tuyaux isolés" loading="lazy" decoding="async" data-img></div>
+        <figcaption><span>03</span>Réseau isolé</figcaption>
+      </figure>
+    </div>
+    <div class="case-col case-col-c" data-par="4">
+      <figure class="case" data-reveal>
+        <div class="par-box"><img src="/media/c-salon.webp" width="1100" height="733" alt="Salon chaleureux au coin du feu" loading="lazy" decoding="async" data-img></div>
+        <figcaption><span>04</span>Le résultat</figcaption>
+      </figure>
+      <div class="cases-foot">
+        <a class="btn btn-navy" href="#contact" data-mag>Votre projet <i class="btn-dot"><svg class="ic"><use href="#i-arrow"/></svg></i></a>
+        <div class="cases-n"><b><span data-count="130">130</span>+</b><span>projets livrés</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= MÉTHODE ======================= -->
+<div class="proc-wrap" id="methode">
+  <section class="proc">
+    <div class="proc-panel on-dark">
+      <div class="proc-left">
+        <span class="chip chip-dark"><i></i>Méthode</span>
+        <h2 class="t">Un degré <em>à la fois.</em></h2>
+        <div class="deck">
+          <article class="step"><b>01</b><h3>Visite</h3><p>On mesure, on écoute.</p></article>
+          <article class="step"><b>02</b><h3>Devis</h3><p>Clair, sans surprise.</p></article>
+          <article class="step"><b>03</b><h3>Pose</h3><p>Soignée, puis réglée.</p></article>
+          <article class="step"><b>04</b><h3>Suivi</h3><p>On reste joignable.</p></article>
+        </div>
+        <div class="steps-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="proc-right">
+        <img class="proc-tech" src="/media/tech.webp" width="1069" height="1300" alt="Artisane en gilet orange, clé serre-tube à la main" loading="lazy" decoding="async">
+        <div class="dial" aria-hidden="true">
+          <svg viewBox="0 0 200 200"><g class="dial-ticks"></g></svg>
+          <div class="dial-knob"><i></i></div>
+          <div class="dial-val"><span>12</span><small>°</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="dim proc-dim"></div>
+  </section>
+</div>
+
+<!-- ======================= IMAGE THERMIQUE ======================= -->
+<div class="th-wrap">
+  <section class="th on-dark">
+    <div class="th-media">
+      <picture>
+        <source media="(max-width: 900px) and (orientation: portrait)" srcset="/media/m/thermal.webp">
+        <img id="th-img" src="/media/thermal.webp" width="2200" height="1461" alt="Main réglant le robinet thermostatique d'un radiateur" decoding="async">
+      </picture>
+      <canvas class="thermal-cv" aria-hidden="true"></canvas>
+    </div>
+    <div class="th-shade"></div>
+    <div class="th-probe" aria-hidden="true"><i></i><b><span>12,0</span>°</b></div>
+    <h2 class="th-title" aria-label="Chaque degré compte.">
+      <span aria-hidden="true" class="morph-line" data-from="150" data-to="900">Chaque degré</span>
+      <em aria-hidden="true">compte.</em>
+    </h2>
+    <div class="dim th-dim"></div>
+  </section>
+</div>
+
+<!-- ======================= ATOUTS ======================= -->
+<section class="perks under">
+  <div class="perks-grid">
+    <div class="perks-head">
+      <span class="chip"><i></i>Pourquoi nous</span>
+      <h2 class="t">Moins de pertes, <em>plus de confort.</em></h2>
+      <a class="btn btn-navy" href="#contact" data-mag>Estimer <i class="btn-dot"><svg class="ic"><use href="#i-arrow"/></svg></i></a>
+    </div>
+    <div class="perks-cards">
+      <article class="perk perk-a" data-tilt><i class="perk-ic"><svg viewBox="0 0 48 48"><path class="flick" d="M24 5c1.500 8 11 12 11 23a11 11 0 0 1-22 0c0-4.500 2.500-7.500 5-9.500.5 3.500 2 5 4 6-1-7 0-14 2-19.500Z"/></svg></i><h3>Économe</h3><p>Chaque kWh utile.</p></article>
+      <article class="perk perk-b" data-tilt><i class="perk-ic"><svg viewBox="0 0 48 48"><path d="M8 30a16 16 0 1 1 32 0"/><path class="needle" d="M24 30 34 19"/><circle cx="24" cy="30" r="2.500"/></svg></i><h3>Pilotable</h3><p>Le bon degré, à la bonne heure.</p></article>
+      <article class="perk perk-c" data-tilt><i class="perk-ic"><svg viewBox="0 0 48 48"><path class="sway" d="M10 38C8 20 22 8 40 8c1 18-11 31-27 28m0 0c3-9 10-15 18-20"/></svg></i><h3>Durable</h3><p>Du matériel qui tient.</p></article>
+      <article class="perk perk-d" data-tilt><i class="perk-ic"><svg viewBox="0 0 48 48"><path d="M24 5 39 11v12c0 10-7 16-15 20-8-4-15-10-15-20V11Z"/><path class="draw" pathLength="100" d="m16 24 6 6 11-12"/></svg></i><h3>Serein</h3><p>Entretien suivi, sans y penser.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= QUESTIONS ======================= -->
+<div class="anchor" id="questions"></div>
+<section class="faq">
+  <div class="faq-dome"></div>
+  <div class="faq-in">
+    <svg class="spark spark-a" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c1 7 4 10 11 11-7 1-10 4-11 11-1-7-4-10-11-11 7-1 10-4 11-11Z"/></svg>
+    <svg class="spark spark-b" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c1 7 4 10 11 11-7 1-10 4-11 11-1-7-4-10-11-11 7-1 10-4 11-11Z"/></svg>
+    <span class="chip"><i></i>Questions</span>
+    <h2 class="t">Vos questions, <em>en bref.</em></h2>
+    <div class="qa">
+      <div class="q is-open">
+        <button type="button" aria-expanded="true"><span>Pompe à chaleur ou chaudière ?</span><i></i></button>
+        <div class="a"><div><p>Cela dépend de votre logement : on vient voir, on mesure, puis on conseille.</p></div></div>
+      </div>
+      <div class="q">
+        <button type="button" aria-expanded="false"><span>Combien de temps dure une pose ?</span><i></i></button>
+        <div class="a"><div><p>Le délai figure sur le devis, une fois le chantier vu sur place.</p></div></div>
+      </div>
+      <div class="q">
+        <button type="button" aria-expanded="false"><span>Faut-il un entretien régulier ?</span><i></i></button>
+        <div class="a"><div><p>Oui : il préserve le rendement et la durée de vie de l’installation.</p></div></div>
+      </div>
+      <div class="q">
+        <button type="button" aria-expanded="false"><span>Existe-t-il des aides ?</span><i></i></button>
+        <div class="a"><div><p>Selon votre situation : on vous indique lesquelles vérifier.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= BANDEAU ======================= -->
+<section class="band" aria-hidden="true">
+  <div class="band-row" data-dir="-1"><span>Pompe à chaleur</span><span class="o">Chaudière</span><span>Plancher chauffant</span><span class="o">Radiateurs</span><span>Climatisation</span><span class="o">Entretien</span><span>Pompe à chaleur</span><span class="o">Chaudière</span></div>
+  <div class="band-row" data-dir="1"><span class="o">Confort</span><span>Sobriété</span><span class="o">Sérénité</span><span>Chaleur</span><span class="o">Confort</span><span>Sobriété</span><span class="o">Sérénité</span><span>Chaleur</span></div>
+</section>
+
+<!-- ======================= AVIS ======================= -->
+<section class="avis">
+  <div class="avis-grid">
+    <figure class="avis-ph" data-reveal>
+      <div class="par-box"><img src="/media/avis.webp" width="1000" height="1250" alt="Pièce à vivre chaleureuse et bien chauffée" loading="lazy" decoding="async" data-img></div>
+    </figure>
+    <div class="avis-side">
+      <span class="chip"><i></i>Avis</span>
+      <h2 class="t">Ils en <em>parlent.</em></h2>
+      <div class="rv-deck on-dark" aria-live="polite">
+        <article class="rv"><div class="stars" aria-hidden="true">★★★★★</div><blockquote>Votre premier avis client ici.</blockquote><cite>Prénom N. · Ville</cite></article>
+        <article class="rv"><div class="stars" aria-hidden="true">★★★★★</div><blockquote>Votre deuxième avis client ici.</blockquote><cite>Prénom N. · Ville</cite></article>
+        <article class="rv"><div class="stars" aria-hidden="true">★★★★★</div><blockquote>Votre troisième avis client ici.</blockquote><cite>Prénom N. · Ville</cite></article>
+      </div>
+      <div class="rv-nav">
+        <button type="button" class="rv-b" data-d="-1" aria-label="Avis précédent"><svg class="ic" style="transform:rotate(-135deg)"><use href="#i-arrow"/></svg></button>
+        <button type="button" class="rv-b" data-d="1" aria-label="Avis suivant"><svg class="ic" style="transform:rotate(45deg)"><use href="#i-arrow"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= CONTACT ======================= -->
+<section class="contact" id="contact">
+  <div class="ct-panel on-dark">
+    <div class="ct-left">
+      <span class="chip chip-dark"><i></i>Contact</span>
+      <h2 class="t">Parlons de <em>votre chauffage.</em></h2>
+      <div class="ct-acts">
+        <a class="ct-act" href="tel:+33000000000" data-rise><i><svg class="ic"><use href="#i-phone"/></svg></i><span><small>Appeler</small>00 00 00 00 00</span></a>
+        <a class="ct-act" href="mailto:contact@votre-domaine.fr" data-rise><i><svg class="ic"><use href="#i-mail"/></svg></i><span><small>Écrire</small>contact@votre-domaine.fr</span></a>
+        <a class="ct-act" href="#contact" data-maps data-rise><i><svg class="ic"><use href="#i-pin"/></svg></i><span><small>Itinéraire</small>Adresse à renseigner</span></a>
+      </div>
+    </div>
+    <form class="ct-form" data-mail="contact@votre-domaine.fr">
+      <label data-rise><span>Nom</span><input name="nom" autocomplete="name" required></label>
+      <label data-rise><span>Téléphone</span><input name="tel" type="tel" autocomplete="tel" required></label>
+      <label class="wide" data-rise><span>Votre besoin</span><textarea name="msg" rows="4"></textarea></label>
+      <button class="btn btn-white" type="submit" data-rise>Envoyer ma demande <i class="btn-dot"><svg class="ic"><use href="#i-arrow"/></svg></i></button>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ======================= FINAL ======================= -->
+<div class="end">
+<section class="cta under on-dark">
+  <video class="cta-v" muted loop playsinline preload="none" data-src="/media/fire.mp4" data-m="/media/m/fire.mp4" data-poster="/media/fire.webp" data-poster-m="/media/m/fire.webp"></video>
+  <div class="cta-shade"></div>
+  <div class="cta-in">
+    <div class="cta-deg"><span data-count="21" data-from="12" data-st="top 165%" data-en="top 92%">21</span><small>°</small></div>
+    <h2 class="t" data-st="top 135%" data-en="top 80%">Il fait bon <em>chez vous.</em></h2>
+    <a class="btn btn-white" href="#contact" data-mag>Demander un devis <i class="btn-dot"><svg class="ic"><use href="#i-arrow"/></svg></i></a>
+  </div>
+</section>
+
+<footer class="ft">
+  <div class="ft-band">
+    <strong>Une panne, une question ?</strong>
+    <a class="btn btn-ink" href="tel:+33000000000" data-mag>00 00 00 00 00 <i class="btn-dot"><svg class="ic"><use href="#i-phone"/></svg></i></a>
+  </div>
+  <div class="ft-grid">
+    <div class="ft-brand">
+      <a class="logo logo-w" href="#top" aria-label="ECO-CHAUFFE, retour en haut"><svg><use href="#i-logo"/></svg><span>ECO<b>-</b>CHAUFFE</span></a>
+      <p>Plus de chaleur, moins d’énergie.</p>
+    </div>
+    <div>
+      <h3>Services</h3>
+      <a href="#services">Pompe à chaleur</a><a href="#services">Chaudière</a><a href="#services">Plancher chauffant</a><a href="#services">Entretien</a>
+    </div>
+    <div>
+      <h3>Le site</h3>
+      <a href="#realisations">Réalisations</a><a href="#methode">Méthode</a><a href="#questions">Questions</a><a href="#contact">Contact</a>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <a href="tel:+33000000000">00 00 00 00 00</a><a href="mailto:contact@votre-domaine.fr">contact@votre-domaine.fr</a><span>Adresse à renseigner</span>
+    </div>
+  </div>
+  <div class="ft-base"><span>© 2026 ECO-CHAUFFE</span></div>
+</footer>
+</div>
+
+<!-- Barre d'action sur téléphone -->
+<nav class="bar" aria-label="Actions rapides">
+  <a href="tel:+33000000000"><svg class="ic"><use href="#i-phone"/></svg>Appeler</a>
+  <a class="bar-fire" href="#contact"><svg class="ic"><use href="#i-arrow"/></svg>Devis</a>
+  <a href="#contact" data-maps><svg class="ic"><use href="#i-pin"/></svg>Itinéraire</a>
+</nav>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
