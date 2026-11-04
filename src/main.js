@@ -14,8 +14,9 @@ const RM = matchMedia('(prefers-reduced-motion: reduce)').matches
 const PHONE = matchMedia('(max-width: 900px)')
 const FINE = matchMedia('(hover: hover) and (pointer: fine)').matches
 const clamp = gsap.utils.clamp
-const deg = (v) => v.toFixed(1).replace('.', ',')
+const deg = (v) => (EN ? v.toFixed(1) : v.toFixed(1).replace('.', ','))
 const vh = () => innerHeight
+const EN = document.documentElement.lang === 'en'
 // « max » désactive un déclencheur tout en bas de page ; celui-ci reste actif jusqu'au bout
 const FOREVER = 1e9
 
@@ -40,7 +41,7 @@ function setupMenu() {
   const set = (open) => {
     menu.hidden = !open
     burger.setAttribute('aria-expanded', open)
-    burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu')
+    burger.setAttribute('aria-label', EN ? (open ? 'Close menu' : 'Open menu') : (open ? 'Fermer le menu' : 'Ouvrir le menu'))
     if (open) lenis?.stop(); else lenis?.start()
   }
   burger.addEventListener('click', () => set(menu.hidden))
@@ -103,13 +104,38 @@ function setupReviews() {
   }))
 }
 
+// Changer de langue : le curseur glisse, puis on arrive au même endroit de la page
+function setupLang() {
+  const sw = $('.lang')
+  sw.addEventListener('click', (e) => {
+    const a = e.target.closest('a')
+    if (!a) return
+    e.preventDefault()
+    if (a.hasAttribute('aria-current')) return
+    sw.dataset.lang = a.lang
+    const max = document.documentElement.scrollHeight - innerHeight
+    const p = max > 0 ? (scrollY / max).toFixed(4) : '0'
+    setTimeout(() => { location.href = `${a.getAttribute('href')}#p=${p}` }, 280)
+  })
+}
+
+const restoreScroll = () => {
+  const m = location.hash.match(/^#p=([\d.]+)/)
+  if (m) {
+    const y = +m[1] * (document.documentElement.scrollHeight - innerHeight)
+    if (lenis) lenis.scrollTo(y, { immediate: true, force: true }); else scrollTo(0, y)
+    history.replaceState(null, '', location.pathname)
+  }
+  document.documentElement.classList.remove('restoring')
+}
+
 function setupForm() {
   const form = $('.ct-form')
   form.addEventListener('submit', (e) => {
     e.preventDefault()
     const d = new FormData(form)
-    const body = `Nom : ${d.get('nom')}\nTéléphone : ${d.get('tel')}\n\n${d.get('msg')}`
-    location.href = `mailto:${form.dataset.mail}?subject=${encodeURIComponent('Demande de devis')}&body=${encodeURIComponent(body)}`
+    const body = EN ? `Name: ${d.get('nom')}\nPhone: ${d.get('tel')}\n\n${d.get('msg')}` : `Nom : ${d.get('nom')}\nTéléphone : ${d.get('tel')}\n\n${d.get('msg')}`
+    location.href = `mailto:${form.dataset.mail}?subject=${encodeURIComponent(EN ? 'Quote request' : 'Demande de devis')}&body=${encodeURIComponent(body)}`
   })
 }
 
@@ -118,9 +144,10 @@ setupAnchors()
 setupFaq()
 setupReviews()
 setupForm()
-const services = setupServices({ gsap, lenis, RM, goTo })
+setupLang()
+const services = setupServices({ gsap, lenis, RM, goTo, EN })
 
-if (!RM) motion()
+if (!RM) motion(); else addEventListener('load', restoreScroll)
 
 function motion() {
   /* ---------- Empilement : sections figées pendant que la suivante recouvre ---------- */
@@ -531,6 +558,7 @@ function motion() {
     lockWords()
     document.documentElement.classList.remove('measure')
     ScrollTrigger.refresh()
+    restoreScroll()
   }
   const fonts = ['650 40px "Urbanist Variable"', '400 16px "Inter Variable"', 'italic 400 40px "Instrument Serif"', '500 14px "Monaspace Neon"']
   Promise.all(fonts.map((f) => document.fonts.load(f))).finally(settle)

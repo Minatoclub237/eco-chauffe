@@ -7,8 +7,8 @@
   <meta name="description" content="ECO-CHAUFFE, à Quaregnon depuis 2016 : chauffage, ventilation, climatisation (CVC), gaz, sanitaire et installation de systèmes thermiques dans la région de Mons-Borinage.">
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#040046">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <script>document.documentElement.classList.add('js')</script>
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <script>document.documentElement.classList.add('js');if(location.hash.indexOf('#p=')===0){document.documentElement.classList.add('restoring');setTimeout(function(){document.documentElement.classList.remove('restoring')},2500)}</script>
   <link rel="preload" as="image" href="/media/hero-1600.webp" imagesrcset="/media/hero-1600.webp 1600w, /media/hero.webp 2200w" imagesizes="100vw" media="not all and (max-width: 900px) and (orientation: portrait)">
   <link rel="preload" as="image" href="/media/m/hero.webp" media="(max-width: 900px) and (orientation: portrait)">
   <link rel="stylesheet" href="/src/style.css">
@@ -23,7 +23,6 @@
   <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3 6h18v12H3zM3 7l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-7.2 7-12.5A7 7 0 0 0 5 9.500C5 14.800 12 22 12 22Z M12 12a2.500 2.500 0 1 0 0-5 2.500 2.500 0 0 0 0 5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
-  <symbol id="i-logo" viewBox="0 0 32 32"><path d="M16 2c1 6 8 9 8 17a8 8 0 0 1-16 0c0-3 1.500-5 3-6.500.3 2.500 1.500 3.500 3 4C13.500 11 14 6 16 2Z" fill="url(#g-logo)"/><defs><linearGradient id="g-logo" x1="8" y1="28" x2="24" y2="4" gradientUnits="userSpaceOnUse"><stop stop-color="#142C98"/><stop offset=".55" stop-color="#3E6BF0"/><stop offset="1" stop-color="#F5623A"/></linearGradient></defs></symbol>
 </svg>
 
 <!-- ======================= EN-TÊTE ======================= -->
@@ -33,9 +32,7 @@
     <a href="mailto:garziad@hotmail.com"><svg class="ic"><use href="#i-mail"/></svg> garziad@hotmail.com</a>
   </div>
   <div class="nav">
-    <a class="logo" href="#top" aria-label="ECO-CHAUFFE, retour en haut">
-      <svg><use href="#i-logo"/></svg><span>ECO<b>-</b>CHAUFFE</span>
-    </a>
+    <a class="logo" href="#top" aria-label="ECO-CHAUFFE, retour en haut"><img src="/media/logo.webp" width="680" height="202" alt="" decoding="async"></a>
     <nav class="links" aria-label="Navigation principale">
       <a href="#services"><small>01</small><span class="roll"><span>Services</span></span></a>
       <a href="#realisations"><small>02</small><span class="roll"><span>En images</span></span></a>
@@ -45,6 +42,7 @@
     </nav>
     <a class="tel" href="tel:+32471053884"><svg class="ic"><use href="#i-phone"/></svg> 0471 05 38 84</a>
     <a class="btn btn-fire btn-s" href="#contact" data-mag>Demander un devis <i class="btn-dot"><svg class="ic"><use href="#i-arrow"/></svg></i></a>
+    <div class="lang" data-lang="fr" role="group" aria-label="Langue"><i class="lang-thumb"></i><a href="/" lang="fr" aria-current="true">FR</a><a href="/en/" lang="en" hreflang="en">EN</a></div>
     <button class="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
   </div>
 </header>
@@ -423,7 +421,7 @@
 
   <div class="ft-grid">
     <div class="ft-brand">
-      <a class="logo logo-w" href="#top" aria-label="ECO-CHAUFFE, retour en haut"><svg><use href="#i-logo"/></svg><span>ECO<b>-</b>CHAUFFE</span></a>
+      <a class="logo logo-w" href="#top" aria-label="ECO-CHAUFFE, retour en haut"><img src="/media/logo-w.webp" width="680" height="202" alt="" decoding="async"></a>
       <p>Plus de chaleur, moins d’énergie.</p>
       <span class="ft-desc">Chauffage, ventilation, climatisation (CVC) et installation de systèmes thermiques, dans la région de Mons-Borinage.</span>
     </div>

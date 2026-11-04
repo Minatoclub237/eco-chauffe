@@ -3,7 +3,7 @@
 // parallaxe au défilement dans le panneau, passage d'un service à l'autre, fermeture vers la carte.
 import { splitTitle } from './type.js'
 
-export function setupServices({ gsap, lenis, RM, goTo }) {
+export function setupServices({ gsap, lenis, RM, goTo, EN }) {
   const $ = (s, c = document) => c.querySelector(s)
   const $$ = (s, c = document) => [...c.querySelectorAll(s)]
   const dialog = $('#sv'), pages = $$('.sv-page', dialog)
@@ -142,7 +142,7 @@ export function setupServices({ gsap, lenis, RM, goTo }) {
     if (devis) {
       e.preventDefault()
       const msg = $('.ct-form textarea')
-      if (msg && !msg.value) msg.value = `Ma demande concerne : ${devis.dataset.name}. `
+      if (msg && !msg.value) msg.value = EN ? `My request is about: ${devis.dataset.name}. ` : `Ma demande concerne : ${devis.dataset.name}. `
       close(() => goTo($('#contact'), -$('.nav').offsetHeight))
     }
   })

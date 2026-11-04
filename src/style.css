@@ -168,10 +168,16 @@ h3 { font-weight: 700; letter-spacing: -.015em; }
 .topbar .ic { color: var(--orange-d); }
 .hdr.is-stuck .topbar { height: 0; border-color: transparent; }
 .nav { display: flex; align-items: center; gap: 1.6rem; height: var(--navh); padding: 0 var(--gut); }
-.logo { display: inline-flex; align-items: center; gap: .4em; font: 800 clamp(1.3rem, 1.75vw, 1.6rem)/1 var(--display); letter-spacing: -.02em; color: var(--blue); margin-right: auto; }
-.logo svg { width: 1.5em; height: 1.5em; }
-.logo b { color: var(--orange); font-weight: 800; }
-.logo-w { color: #fff; }
+.logo { display: inline-flex; align-items: center; margin-right: auto; flex: none; }
+.logo img { height: clamp(46px, 4.1vw, 60px); width: auto; }
+.logo-w img { height: clamp(58px, 5.4vw, 80px); }
+/* Sélecteur de langue */
+.lang { position: relative; isolation: isolate; flex: none; display: grid; grid-template-columns: 1fr 1fr; width: 88px; height: 44px; padding: 3px; border-radius: 99px; background: var(--ice); font: 500 14px/1 var(--mono); }
+.lang a { display: grid; place-items: center; border-radius: 99px; color: var(--navy); transition: color .3s; }
+.lang a[aria-current='true'] { color: #fff; }
+.lang-thumb { position: absolute; z-index: -1; top: 3px; bottom: 3px; left: 3px; width: calc(50% - 3px); border-radius: 99px; background: var(--orange-d); box-shadow: 0 4px 12px rgba(212, 68, 27, .4); transition: transform .35s var(--ease); }
+.lang[data-lang='en'] .lang-thumb { transform: translateX(100%); }
+.restoring body { opacity: 0; }
 .links { display: flex; gap: clamp(1rem, 2.1vw, 2.2rem); }
 .links a { display: inline-flex; align-items: baseline; gap: .4em; font: 600 var(--fs-small)/1.4 var(--display); }
 .links small { font: 500 14px/1 var(--mono); color: var(--orange-d); }
@@ -751,6 +757,7 @@ html.lenis-stopped { overflow: hidden; scrollbar-gutter: stable; }
 /* ========== Pages légales ========== */
 .lg-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem var(--gut); box-shadow: 0 1px 0 var(--line); }
 .lg-head .logo { margin: 0; }
+.lg-right { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: .7rem 1.2rem; }
 .lg-back { font: 700 var(--fs-small)/1 var(--display); text-decoration: underline; text-underline-offset: .2em; }
 .lg-main { max-width: 780px; margin: 0 auto; padding: clamp(2.4rem, 7vh, 4.5rem) var(--gut) clamp(3rem, 8vh, 5rem); }
 .lg-main h1 { font: 700 clamp(2.4rem, 5vw, 3.8rem)/1.05 var(--display); letter-spacing: -.025em; }
@@ -759,7 +766,6 @@ html.lenis-stopped { overflow: hidden; scrollbar-gutter: stable; }
 .lg-main ul { list-style: disc; padding-left: 1.2em; }
 .lg-main a { color: var(--orange-d); text-decoration: underline; text-underline-offset: .2em; overflow-wrap: anywhere; }
 .lg-date { margin-top: .8rem; color: var(--muted); }
-.lg-todo { padding: .05em .4em; border-radius: 6px; background: #FFE9B8; color: #5A3A00; }
 .lg-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .6rem 2rem; padding: 1.4rem var(--gut); background: var(--ink); color: rgba(255, 255, 255, .88); font-size: var(--fs-small); }
 .lg-foot nav { display: flex; flex-wrap: wrap; gap: .5rem 1.4rem; }
 .lg-foot a { text-decoration: underline; text-underline-offset: .2em; }
@@ -767,11 +773,12 @@ html.lenis-stopped { overflow: hidden; scrollbar-gutter: stable; }
 /* ========== Tablette et téléphone ========== */
 @media (max-width: 1340px) {
   .links small { display: none; }
-  .nav { gap: 1.1rem; }
+  .nav { gap: 1rem; }
+  .nav .tel { display: none; }
 }
 @media (max-width: 1180px) {
   .links, .nav .tel { display: none; }
-  .burger { display: block; }
+  .burger { display: block; flex: none; }
   .nav .btn-s { display: none; }
   :root { --topbar: 0px; --navh: 68px; }
   .topbar { display: none; }

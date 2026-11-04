@@ -103,6 +103,54 @@ const go = (p, y) => p.evaluate((v) => window.__lenis.scrollTo(v, { immediate: t
   await p.close()
 }
 
+// ---- Logos et version anglaise ----
+for (const [mode, vp] of [['ordi', { width: 1440, height: 827 }], ['tel', { width: 390, height: 844, deviceScaleFactor: 2, isMobile: true, hasTouch: true }]]) {
+  const p = await b.newPage(); await p.setViewport(vp)
+  const errs = []; p.on('pageerror', (e) => errs.push(e.message))
+  await p.goto(U + 'en/', { waitUntil: 'networkidle2' }); await wait(1300)
+  const e = await p.evaluate(() => ({
+    lang: document.documentElement.lang,
+    logo: document.querySelector('.hdr .logo img').currentSrc,
+    logoOk: document.querySelector('.hdr .logo img').naturalWidth > 0,
+    foot: document.querySelector('.ft .logo img').currentSrc,
+    h1: document.querySelector('h1').getAttribute('aria-label'),
+    cur: document.querySelector('.lang [aria-current]').textContent,
+    over: document.documentElement.scrollWidth > innerWidth,
+    hud: document.querySelector('.hud-val span').textContent,
+  }))
+  ok('EN ' + mode + ' : page anglaise', e.lang === 'en' && e.cur === 'EN' && e.h1 === 'More warmth, less energy.', e.h1)
+  ok('EN ' + mode + ' : logos clair et bleu', e.logoOk && e.logo.includes('/logo.webp') && e.foot.includes('/logo-w.webp'))
+  ok('EN ' + mode + ' : largeur sans débordement', !e.over)
+  ok('EN ' + mode + ' : décimale anglaise', e.hud.includes('.'), e.hud)
+  // Bascule au milieu de la page : on reste au même endroit, et retour
+  const y = await p.evaluate(() => { const v = (document.documentElement.scrollHeight - innerHeight) * 0.4; window.__lenis.scrollTo(v, { immediate: true, force: true }); return v }); await wait(900)
+  const nav = p.waitForNavigation({ waitUntil: 'networkidle2' })
+  await p.evaluate(() => document.querySelector('.lang a[lang="fr"]').click()); await nav; await wait(1700)
+  const s = await p.evaluate(() => ({ lang: document.documentElement.lang, y: scrollY, frac: scrollY / (document.documentElement.scrollHeight - innerHeight), hash: location.hash, op: getComputedStyle(document.body).opacity }))
+  ok('Bascule ' + mode + ' EN > FR au même endroit', s.lang === 'fr-BE' && Math.abs(s.frac - 0.4) < 0.02 && s.hash === '' && s.op === '1', JSON.stringify(s))
+  // Un panneau de service en anglais
+  await p.goto(U + 'en/', { waitUntil: 'networkidle2' }); await wait(900)
+  await p.evaluate(() => document.querySelector('.ft a[data-sv="gaz"]').click()); await wait(1800)
+  const sv = await p.evaluate(() => { const g = document.querySelector('.sv-page:not([hidden])'); return { t: g.querySelector('.sv-t').getAttribute('aria-label'), q: g.querySelector('.sv-q h3').textContent } })
+  ok('EN ' + mode + ' : panneau traduit', sv.t === 'Gas' && sv.q.includes('gas'), JSON.stringify(sv))
+  for (const path of ['en/legal-notice.html', 'en/privacy.html', 'mentions-legales.html']) {
+    const r = await p.goto(U + path, { waitUntil: 'networkidle2' })
+    const t = await p.evaluate(() => ({ h1: document.querySelector('h1').textContent, logo: document.querySelector('.logo img')?.naturalWidth > 0, sw: !!document.querySelector('.lang'), over: document.documentElement.scrollWidth > innerWidth }))
+    ok(mode + ' ' + path, r.status() < 400 && t.logo && t.sw && !t.over, t.h1)
+  }
+  ok('EN ' + mode + ' : aucune erreur JS', errs.length === 0, errs.join(' | '))
+  await p.close()
+}
+{
+  const p = await b.newPage()
+  for (const page of ['', 'en/']) for (const w of [1190, 1280, 1366, 1440]) {
+    await p.setViewport({ width: w, height: 800 }); await p.goto(U + page, { waitUntil: 'networkidle2' }); await wait(350)
+    const n = await p.evaluate(() => { const r = document.querySelector('.nav'), c = [...r.children].filter((e) => e.offsetParent !== null).map((e) => e.getBoundingClientRect()); return { over: c.some((x) => x.right > innerWidth - 8), tall: Math.max(...c.map((x) => x.height)), touch: c.slice(1).some((x, i) => x.left < c[i].right - 1) } })
+    ok(`en-tête ${page || 'fr'} à ${w} px`, !n.over && n.tall < 70 && !n.touch, JSON.stringify(n))
+  }
+  await p.close()
+}
+
 // ---- Téléphone ----
 {
   const p = await b.newPage(); await p.setViewport({ width: 390, height: 844, deviceScaleFactor: 2, isMobile: true, hasTouch: true })
