@@ -3,3 +3,6 @@ dist
 _raw
 .vercel
 .env*
+
+# Notes internes sur le prospect : jamais dans le dÃ©pÃ´t public
+A-COMPLETER.md
